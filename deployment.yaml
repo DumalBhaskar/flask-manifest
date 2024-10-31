@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: cloud1111/jenkins-flask-app-demo:2
+        image: dumalbhaskar/flask-app:9
         ports:
         - containerPort: 5000
         resources:
