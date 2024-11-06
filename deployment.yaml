@@ -1,28 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app-deployment-prod
+  name: petclinic-app-deployment
   labels:
-    app: flask-app
+    app: petclinic-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask-app
+      app: petclinic-app
   template:
     metadata:
       labels:
-        app: flask-app
+        app: petclinic-app
     spec:
       containers:
-      - name: flask-app
-        image: dumalbhaskar/flask-app:11
+      - name: petclinic-app
+        image: 533267075370.dkr.ecr.ap-south-1.amazonaws.com/petclinic:10-1a6c073
         ports:
-        - containerPort: 5000
-        resources:
-          limits:
-            cpu: "1"
-            memory: "500Mi"
-          requests:
-            cpu: "0.5"
-            memory: "200Mi"
+        - containerPort: 8080
+       
