@@ -16,6 +16,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
+
+ENV SCRAPE_URL=https://example.com
+
 # Copy scraper script
 COPY scrape.js .
 
@@ -32,9 +35,11 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy scraped data and server script
-COPY scraped_data.json .
+COPY --from=scraper /app/scraped_data.json .
 COPY server.py .
 
 # Expose port and run server
 EXPOSE 5000
-CMD ["python", "/app/server.py"]
+ENV FLASK_APP=server.py
+ENV FLASK_RUN_HOST=0.0.0.0
+CMD ["flask", "run"]

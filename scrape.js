@@ -2,11 +2,12 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 (async () => {
+  const targetWebsite = process.env.SCRAPE_URL
   const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   const page = await browser.newPage();
 
   // Navigate to the target website
-  await page.goto('https://killercoda.com');
+  await page.goto(targetWebsite);
 
   // Extract data: Page title and first heading
   const result = await page.evaluate(() => {
@@ -16,9 +17,9 @@ const fs = require('fs');
   });
 
   // Save the extracted data to a JSON file
-  fs.writeFileSync('extracted-data.json', JSON.stringify(result, null, 2));
+  fs.writeFileSync('scraped_data.json', JSON.stringify(result, null, 2));
 
-  console.log('Data saved to extracted-data.json');
+  console.log('Data saved to scraped_data.json');
 
   await browser.close();
 })();

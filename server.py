@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     # Load data from the JSON file
-    with open('data.json', 'r') as file:
+    with open('scraped_data.json', 'r') as file:
         data = json.load(file)
     return jsonify(data)
 
