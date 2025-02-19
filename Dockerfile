@@ -16,8 +16,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-
-ENV SCRAPE_URL=https://example.com
+# set varaible to pass target url
+ARG SCRAPE_URL=https://exactspace.co
+ENV SCRAPE_URL=${SCRAPE_URL}
 
 # Copy scraper script
 COPY scrape.js .
